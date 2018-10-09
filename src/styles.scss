@@ -1,0 +1,12 @@
+// // DEFAULT BOOTSTRAP
+@import "functions";
+@import "variables";
+@import "mixins";
+
+@import "root";
+@import "reboot";
+
+html, body {
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
