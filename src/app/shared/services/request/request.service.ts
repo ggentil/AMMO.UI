@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class RequestService {
 
-    //private BASE_API_URL: string = "https://ammo-api.herokuapp.com";
-    private BASE_API_URL: string = "http://localhost:3000";
+    private BASE_API_URL: string = environment.API_URL;
     private internalRequest: boolean = false;
 
     constructor(private _http: HttpClient) { }
