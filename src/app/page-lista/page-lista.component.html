@@ -1,0 +1,100 @@
+
+<header #header>
+  
+  <div class="containerr">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-2">
+        <img class="logo" src="./assets/logo.jpg" alt="AMMO.UI">
+      </div>
+      <div class="col-2">
+
+        <form (submit)="recarregarListagem()" class="buscaPorTermo">
+          <button type="submit" class="submit">
+              <img src="./assets/btn-busca.jpg" alt="Buscar">
+          </button>
+
+          <input type="text" name="termo" id="termo" placeholder="Faça sua busca" [(ngModel)]="termo">
+
+          <a class="zerarBusca" href="#" (click)="zerarBusca();">
+            <img src="./assets/btn-limpa.jpg" alt="Zerar Busca">
+          </a>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<section class="buscaTitle">
+  <div class="containerr">
+    <div class="row align-items-center">
+      <div class="col-12">
+        <h1>
+          {{ buscaTitulo }}
+        </h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+
+    <div class="row my-5" *ngIf="qtdeTotalProdutos > 0">
+      <div class="col-12" class="qtdeTotalProdutos">
+        <span *ngIf="qtdeTotalProdutos != 1">{{ qtdeTotalProdutos }} PRODUTOS ENCONTRADOS</span>
+        <span *ngIf="qtdeTotalProdutos == 1">1 PRODUTO ENCONTRADO</span>
+      </div>
+    </div>
+    
+    <div class="row produto" *ngFor="let produto of produtos">
+      <div class="col-12">
+        <produto [produto]="produto"></produto>
+      </div>
+    </div>
+
+    <div class="row align-items-center justify-content-between controls">
+
+      <div class="col-6 first">
+        <label class="qtdePorPagina" for="qtdePorPagina" [style.backgroundImage]="'url(./assets/control1.png)'">
+          <select name="qtdePorPagina" id="qtdePorPagina" [(ngModel)]="produtosPorPagina" (change)="recarregarListagem();">
+            <option value="8">8 produtos por página</option>
+            <option value="16">16 produtos por página</option>
+            <option value="32">32 produtos por página</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="col-6 last" *ngIf="pages && pages.qtdeTotalPaginas > 1">
+        <ul class="pages d-flex justify-content-end">
+
+          <li class="firstPage" [class.desativada]="pages.paginaAtual == 1" (click)="pages.paginaAtual != 1 ? irParaPagina(1, pages) : null;">
+            <img src="./assets/control2.png">
+          </li>
+          
+          <li class="prevPage" [class.desativada]="!pages.anterior" (click)="pages.anterior ? irParaPagina(pages.anterior) : null;">
+            <img src="./assets/control1.png">
+          </li>
+
+          <li 
+            *ngFor="let page of pages.disponiveis" 
+            [class.selected]="page == pages.paginaAtual"
+            (click)="page != pages.paginaAtual ? irParaPagina(page) : null;">
+            {{ page }}
+          </li>
+
+          <li class="nextPage" [class.desativada]="!pages.proxima" (click)="pages.proxima ? irParaPagina(pages.proxima) : null;">
+            <img src="./assets/control1.png">
+          </li>
+          <li class="lastPage" [class.desativada]="pages.paginaAtual == pages.qtdeTotalPaginas" (click)="pages.paginaAtual != pages.qtdeTotalPaginas ? irParaPagina(pages.qtdeTotalPaginas) : null;">
+            <img src="./assets/control2.png">
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>

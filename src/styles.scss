@@ -1,0 +1,23 @@
+// // DEFAULT BOOTSTRAP
+@import "functions";
+@import "variables";
+@import "mixins";
+
+@import "root";
+@import "reboot";
+
+html, body {
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+  
+    & > [class^="col-"],
+    & > [class*=" col-"] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
