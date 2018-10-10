@@ -5,6 +5,7 @@ import { PageListaComponent } from "./page-lista/page-lista.component";
 
 
 const APP_ROUTES: Routes = [
+    { path: ':qtdePorPagina/:pagina/:termo', component: PageListaComponent },
     { path: ':pagina/:termo', component: PageListaComponent },
     { path: ':pagina', component: PageListaComponent },
     { path: '', component: PageListaComponent },

@@ -36,26 +36,28 @@ export class PageListaComponent implements OnInit {
     atualizarPagina(){
         this._activatedRouteService.params
             .subscribe(params => {
-                this.carregarListagem(params.pagina ? params.pagina : 1, params.termo ? params.termo : '');
+                this.carregarListagem(params.qtdePorPagina ? params.qtdePorPagina : this.produtosPorPagina, params.pagina ? params.pagina : 1, params.termo ? params.termo : '');
             }, error => {
                 console.log(error);
-                this.carregarListagem(1, '');
+                this.carregarListagem(this.produtosPorPagina, 1, '');
             });
     }
 
     zerarBusca() {
         this.termo = '';
-        this.recarregarListagem();
+        this.recarregarListagemBusca();
     };
 
     recarregarListagem() {
-        //this.carregarListagem(1, this.termo);
-        this.router.navigate(['', 1, this.termo]);
+        this.router.navigate(['', this.produtosPorPagina, this.pages.paginaAtual, this.termo]);
+    };
+
+    recarregarListagemBusca() {
+        this.router.navigate(['', this.produtosPorPagina, 1, this.termo]);
     };
 
     irParaPagina(pagina) {
-        //this.carregarListagem(pagina, this.pages.termo);
-        this.router.navigate(['', pagina, this.pages.termo]);
+        this.router.navigate(['', this.produtosPorPagina, pagina, this.pages.termo]);
     }
 
     montarPaginacao(termoUsado, paginaAtual) {
@@ -92,12 +94,13 @@ export class PageListaComponent implements OnInit {
         if(paginaAtual + 1 <= qtdeTotalPaginas) this.pages.proxima = paginaAtual + 1;
     };
 
-    carregarListagem(pagina, termo) {
-        this._produtoService.listarProdutos(this.produtosPorPagina, pagina, termo)
+    carregarListagem(produtosPorPagina, pagina, termo) {
+        this._produtoService.listarProdutos(produtosPorPagina, pagina, termo)
             .subscribe(response => {
                 if(response.success) {
                     this.produtos = response.data.produtos;
                     this.qtdeTotalProdutos = response.data.total;
+                    this.produtosPorPagina = produtosPorPagina;
                     this.termo = termo;
 
                     this.montarPaginacao(termo, pagina);
