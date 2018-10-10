@@ -1,0 +1,71 @@
+// DEFAULT BOOTSTRAP
+@import "functions";
+@import "variables";
+@import "mixins";
+@import "root";
+@import "reboot";
+@import "utilities";
+@import "grid";
+@import "tables";
+
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.listaImgs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.idents {
+    .nome {
+        font-weight: 500;
+        font-size: 18px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+        display: flex;
+
+        li {
+            color: #7b7b7b;
+            margin-right: 3px;
+
+            &:not(:first-child) {
+                &::before {
+                    content: '●';
+                    font-size: 3px;
+                    top: -5px;
+                    position: relative;
+                    margin-right: 3px;
+                }
+            }
+        }
+    }
+}
+
+.prices {
+    color: #7b7b7b;
+    font-size: 16px;
+ 
+    .precoDe {
+        text-decoration: line-through;
+        margin-right: 5px;
+        text-transform: uppercase;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .precoPor {
+        margin: 0px; 
+        
+        span {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333333;
+        }
+    }
+}

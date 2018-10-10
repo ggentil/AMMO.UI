@@ -1,0 +1,30 @@
+<div class="row my-2 align-items-center">
+    
+    <div class="col-12 col-xl-5" *ngIf="produto.imagens && produto.imagens.length > 0">
+        <div class="listaImgs">
+            <img *ngFor="let img of produto.imagens" src="{{ img }}">
+        </div>
+    </div>
+
+    <div class="col-12" [class.col-xl-4]="produto.imagens && produto.imagens.length > 0" [class.col-xl-9]="!produto.imagens || produto.imagens.length == 0">
+        <div class="idents">
+            <span class="nome">{{ produto.nome }}</span>
+            <ul *ngIf="produto.categorias && produto.categorias.length > 0">
+                <li *ngFor="let cat of produto.categorias">{{ cat.nome }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-12 col-xl-3">
+        <div class="prices d-flex justify-content-end">
+            <span class="precoDe" *ngIf="produto.precoDe">
+                {{ produto.precoDe.toLocaleString('pt-br', formatoReal) }}
+            </span>
+
+            <p class="precoPor" *ngIf="produto.precoPor">
+                por <span>{{ produto.precoPor.toLocaleString('pt-br', formatoReal) }}</span>
+            </p>
+        </div>
+    </div>
+
+</div>
