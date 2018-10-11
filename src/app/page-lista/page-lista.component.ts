@@ -61,7 +61,7 @@ export class PageListaComponent implements OnInit {
     }
 
     montarPaginacao(termoUsado, paginaAtual) {
-        let qtdeTotalPaginas = Math.trunc(this.qtdeTotalProdutos / this.produtosPorPagina);
+        let qtdeTotalPaginas = Math.ceil(this.qtdeTotalProdutos / this.produtosPorPagina);
         let disponiveis = [];
 
         qtdeTotalPaginas = qtdeTotalPaginas == 0 ? 1 : qtdeTotalPaginas;
